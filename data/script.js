@@ -614,94 +614,97 @@ function CvBacklog(pluginSettings, backlogUrl) {
   self.refresh();
 }
 
-(function($) {
-  var settings = new Settings();
-  var pluginSettings = new PluginSettings(settings);
+self.port.on("custom-jplayer-script", function(data) {
+  var customAudioPlayerScript = data;
 
-  var soundManager = new SoundManager(pluginSettings);
+  (function($) {
+    var settings = new Settings();
+    var pluginSettings = new PluginSettings(settings);
 
-  var buttonsManager = new ButtonsManager(pluginSettings);
+    var soundManager = new SoundManager(pluginSettings);
 
-  var voteRequestFormatter = new VoteRequestFormatter(pluginSettings);
-  var audioPlayer = new AudioPlayer('http://or.cdn.sstatic.net/chat/so.ogg');
-  var avatarNotificationStack = new RequestStack();
-  var avatarNotification = new AvatarNotification(avatarNotificationStack, pluginSettings);
-  var voteRequestProcessor = new VoteRequestProcessor(pluginSettings, voteRequestFormatter, audioPlayer, avatarNotification);
+    var buttonsManager = new ButtonsManager(pluginSettings);
 
-  var stackApi = new StackApi();
-  var voteQueueProcessor = new VoteQueueProcessor(stackApi, voteRequestProcessor);
+    var voteRequestFormatter = new VoteRequestFormatter(pluginSettings);
+    var audioPlayer = new AudioPlayer(customAudioPlayerScript, 'http://or.cdn.sstatic.net/chat/so.ogg');
+    var avatarNotificationStack = new RequestStack();
+    var avatarNotification = new AvatarNotification(avatarNotificationStack, pluginSettings);
+    var voteRequestProcessor = new VoteRequestProcessor(pluginSettings, voteRequestFormatter, audioPlayer, avatarNotification);
 
-  var chatRoom = new ChatRoom();
-  var voteRequestMessageQueue = new RequestQueue();
-  var voteRequestListener = new VoteRequestListener(chatRoom, voteRequestMessageQueue, voteQueueProcessor);
+    var stackApi = new StackApi();
+    var voteQueueProcessor = new VoteQueueProcessor(stackApi, voteRequestProcessor);
 
-  var pollMessageQueue = new RequestQueue();
-  var statusRequestProcessor = new StatusRequestProcessor(pluginSettings);
-  var pollQueueProcessor = new VoteQueueProcessor(stackApi, statusRequestProcessor);
-  var statusPolling = new StatusPolling(pluginSettings, pollMessageQueue, pollQueueProcessor);
+    var chatRoom = new ChatRoom();
+    var voteRequestMessageQueue = new RequestQueue();
+    var voteRequestListener = new VoteRequestListener(chatRoom, voteRequestMessageQueue, voteQueueProcessor);
 
-  var desktopNotification = new DesktopNotification(pluginSettings);
+    var pollMessageQueue = new RequestQueue();
+    var statusRequestProcessor = new StatusRequestProcessor(pluginSettings);
+    var pollQueueProcessor = new VoteQueueProcessor(stackApi, statusRequestProcessor);
+    var statusPolling = new StatusPolling(pluginSettings, pollMessageQueue, pollQueueProcessor);
 
-  var cvBacklog = new CvBacklog(pluginSettings, 'http://cvbacklog.gordon-oheim.biz/');
+    var desktopNotification = new DesktopNotification(pluginSettings);
 
-  chrome.extension.sendRequest({method: 'getSettings'}, function(settingsJsonString) {
-    pluginSettings.saveAllSettings(settingsJsonString);
-    buttonsManager.init();
-    voteRequestListener.init();
-    // wait 1 minute before polling to prevent getting kicked from stack-api
-    setTimeout(statusPolling.pollStatus, 60000);
+    var cvBacklog = new CvBacklog(pluginSettings, 'http://cvbacklog.gordon-oheim.biz/');
 
-    // desktop notifications test
-    //desktopNotification.show('the <a href="#">title</a>', 'http://stackoverflow.com');
+    self.port.on("getSettings", function(settingsJsonString) {
+      pluginSettings.saveAllSettings(settingsJsonString);
+      buttonsManager.init();
+      voteRequestListener.init();
+      // wait 1 minute before polling to prevent getting kicked from stack-api
+      setTimeout(statusPolling.pollStatus, 60000);
 
-    cvBacklog.show();
+      // desktop notifications test
+      //desktopNotification.show('the <a href="#">title</a>', 'http://stackoverflow.com');
 
-    chrome.extension.sendRequest({method: 'showIcon'}, function(response) { });
-    chrome.extension.sendRequest({method: 'checkUpdate'}, function(response) { });
+      cvBacklog.show();
 
-    // sound options
-    $('#sound').click(function() {
-      soundManager.watchPopup();
+      //chrome.extension.sendRequest({method: 'checkUpdate'}, function(response) { });
+
+      // sound options
+      $('#sound').click(function() {
+        soundManager.watchPopup();
+      });
+
+      // save sound setting
+      $('body').on('click', '#cvpls-sound li', function() {
+        soundManager.toggleSound();
+
+        return false;
+      });
     });
 
-    // save sound setting
-    $('body').on('click', '#cvpls-sound li', function() {
-      soundManager.toggleSound();
+    // handle click on avatar notification
+    $('body').on('click', '#cv-count', function() {
+      avatarNotification.navigateToLastRequest();
 
       return false;
     });
-  });
 
-  // handle click on avatar notification
-  $('body').on('click', '#cv-count', function() {
-    avatarNotification.navigateToLastRequest();
+    // handle cvpls button click
+    $('body').on('click', '#cv-pls-button', function() {
+      var val = $('#input').val();
+      $('#input').val('[tag:cv-pls] ' + val).focus().putCursorAtEnd();
 
-    return false;
-  });
+      if (val != '') {
+        $('#sayit-button').click();
+      }
+    });
 
-  // handle cvpls button click
-  $('body').on('click', '#cv-pls-button', function() {
-    var val = $('#input').val();
-    $('#input').val('[tag:cv-pls] ' + val).focus().putCursorAtEnd();
+    // handle delvpls button click
+    $('body').on('click', '#delv-pls-button', function() {
+      var val = $('#input').val();
+      $('#input').val('[tag:delv-pls] ' + val).focus().putCursorAtEnd();
 
-    if (val != '') {
-      $('#sayit-button').click();
-    }
-  });
+      if (val != '') {
+        $('#sayit-button').click();
+      }
+    });
 
-  // handle delvpls button click
-  $('body').on('click', '#delv-pls-button', function() {
-    var val = $('#input').val();
-    $('#input').val('[tag:delv-pls] ' + val).focus().putCursorAtEnd();
-
-    if (val != '') {
-      $('#sayit-button').click();
-    }
-  });
-
-  // handle click on link of a request
-  $('body').on('click', '.cvhelper-question-link', function() {
-    var id = $(this).closest('.message').attr('id').split('-')[1];
-    avatarNotification.manualDeleteFromStack(id);
-  });
-})(jQuery);
+    // handle click on link of a request
+    $('body').on('click', '.cvhelper-question-link', function() {
+      var id = $(this).closest('.message').attr('id').split('-')[1];
+      avatarNotification.manualDeleteFromStack(id);
+    });
+  })(jQuery);
+});
