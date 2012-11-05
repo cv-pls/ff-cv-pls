@@ -1,0 +1,3 @@
+[submodule "src/chrome/content/cv-pls"]
+	path = src/chrome/content/cv-pls
+	url = git://github.com/DaveRandom/cv-pls.git
