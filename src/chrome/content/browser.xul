@@ -8,9 +8,7 @@
 <overlay id="cv-pls-browser-overlay" xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul">
 
   <!-- libraries -->
-  <script src="chrome://cv-pls/content/cv-pls/lib/jquery-1.7.1.min.js" />
-  <script src="chrome://cv-pls/content/cv-pls/lib/jquery-ui-1.8.18.custom.min.js" />
-  <script src="chrome://cv-pls/content/cv-pls/lib/griphandler-0.10.1.min.js" />
+  <script src="chrome://cv-pls/content/cv-pls/lib/grippie.js" />
   <script src="chrome://cv-pls/content/cv-pls/lib/shims.js" />
   <script src="chrome://cv-pls/content/cv-pls/lib/mutations.js" />
   <script src="chrome://cv-pls/content/cv-pls/lib/animator.js" />
@@ -31,6 +29,7 @@
   <script src="chrome://cv-pls/content/cv-pls/src/CollectionFactory.js" />
   <script src="chrome://cv-pls/content/cv-pls/src/CvBacklog.js" />
   <script src="chrome://cv-pls/content/cv-pls/src/DesktopNotification.js" />
+  <script src="chrome://cv-pls/content/cv-pls/src/GrippieFactory.js" />
   <script src="chrome://cv-pls/content/cv-pls/src/OneBox.js" />
   <script src="chrome://cv-pls/content/cv-pls/src/OneBoxFactory.js" />
   <script src="chrome://cv-pls/content/cv-pls/src/Post.js" />
