@@ -10,6 +10,7 @@
     <em:version>0.20.0</em:version>
     <em:creator>[cv-ring]</em:creator>
     <em:homepageURL>http://github.com/cv-pls/ff-cv-pls</em:homepageURL>
+    <em:optionsURL>chrome://cv-pls/content/options.xul</em:optionsURL>
     <em:type>2</em:type>
 
     <!-- Mozilla Firefox -->
