@@ -1,15 +1,14 @@
-cv-pls Firefox
-==============
+Firefox [cv-pls]
+================
 
-This Firefox addon will help you close voting questions on Stack Overflow.
+Mozilla Firefox extension wrapper for the [[cv-pls] Helper][1].
 
-It will convert all [cv-pls] and [delv-pls] requests into nice oneboxes in the SO chat.
+Current stable version: *None*  
+Current development version: [0.20-beta1](https://github.com/downloads/cv-pls/ff-cv-pls/cv-pls_0.20-beta1.xpi)
 
-[Download current stable version (0.2)][1]
+Installation
+------------
 
-Usage
------
+Download the required package above. Click Tools > Add-Ons and drag-and-drop the .xpi file onto the page to install.
 
-Simply install the plugin and all [cv-pls] or [delv-pls] requests will automatically be converted into formatted oneboxes.
-
-[1]:https://github.com/downloads/cv-pls/ff-cv-pls/cv-pls.xpi
+[1]:https://github.com/cv-pls/cv-pls

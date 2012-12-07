@@ -1,0 +1,57 @@
+<?xml version="1.0"?>
+
+<?xml-stylesheet type="text/css" href="chrome://global/skin/" ?>
+
+<!DOCTYPE overlay SYSTEM "chrome://cv-pls/locale/cv-pls.dtd">
+
+<overlay id="cv-pls-browser-overlay" xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul">
+
+  <!-- libraries -->
+  <script src="chrome://cv-pls/content/cv-pls/lib/grippie.js" />
+  <script src="chrome://cv-pls/content/cv-pls/lib/shims.js" />
+  <script src="chrome://cv-pls/content/cv-pls/lib/mutations.js" />
+  <script src="chrome://cv-pls/content/cv-pls/lib/animator.js" />
+
+  <!-- namespace container -->
+  <script src="chrome://cv-pls/content/cv-pls/src/CvPlsHelper.js" />
+
+  <!-- application object constructors -->
+  <script src="chrome://cv-pls/content/cv-pls/src/AnimatorFactory.js" />
+  <script src="chrome://cv-pls/content/cv-pls/src/ApiResponseProcessor.js" />
+  <script src="chrome://cv-pls/content/cv-pls/src/AudioPlayer.js" />
+  <script src="chrome://cv-pls/content/cv-pls/src/AvatarNotificationDisplay.js" />
+  <script src="chrome://cv-pls/content/cv-pls/src/AvatarNotificationDisplayFactory.js" />
+  <script src="chrome://cv-pls/content/cv-pls/src/AvatarNotificationManager.js" />
+  <script src="chrome://cv-pls/content/cv-pls/src/ButtonsManager.js" />
+  <script src="chrome://cv-pls/content/cv-pls/src/ChatRoom.js" />
+  <script src="chrome://cv-pls/content/cv-pls/src/Collection.js" />
+  <script src="chrome://cv-pls/content/cv-pls/src/CollectionFactory.js" />
+  <script src="chrome://cv-pls/content/cv-pls/src/CvBacklog.js" />
+  <script src="chrome://cv-pls/content/cv-pls/src/DesktopNotification.js" />
+  <script src="chrome://cv-pls/content/cv-pls/src/GrippieFactory.js" />
+  <script src="chrome://cv-pls/content/cv-pls/src/OneBox.js" />
+  <script src="chrome://cv-pls/content/cv-pls/src/OneBoxFactory.js" />
+  <script src="chrome://cv-pls/content/cv-pls/src/Post.js" />
+  <script src="chrome://cv-pls/content/cv-pls/src/PostFactory.js" />
+  <script src="chrome://cv-pls/content/cv-pls/src/QuestionStatusPoller.js" />
+  <script src="chrome://cv-pls/content/cv-pls/src/SoundManager.js" />
+  <script src="chrome://cv-pls/content/cv-pls/src/StackApi.js" />
+  <script src="chrome://cv-pls/content/cv-pls/src/VoteQueueProcessor.js" />
+  <script src="chrome://cv-pls/content/cv-pls/src/VoteRemoveProcessor.js" />
+  <script src="chrome://cv-pls/content/cv-pls/src/VoteRequestBufferFactory.js" />
+  <script src="chrome://cv-pls/content/cv-pls/src/VoteRequestListener.js" />
+
+  <!-- application containers -->
+  <script src="chrome://cv-pls/content/cv-pls/src/ChatApplication.js" />
+  <script src="chrome://cv-pls/content/cv-pls/src/QuestionApplication.js" />
+
+  <!-- firefox specific constructors -->
+  <script src="chrome://cv-pls/content/DefaultSettings.js" />
+  <script src="chrome://cv-pls/content/DesktopNotificationDispatcher.js" />
+  <script src="chrome://cv-pls/content/SettingsDataAccessor.js" />
+  <script src="chrome://cv-pls/content/SettingsDataStore.js" />
+
+  <!-- bootstrap -->
+  <script src="chrome://cv-pls/content/bootstrap.js" />
+
+</overlay>

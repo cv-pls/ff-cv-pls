@@ -1,0 +1,18 @@
+label {
+  margin: 5px 5px 5px 1px;
+  vertical-align: middle;
+}
+label.spaced {
+  margin-right: 5px;
+}
+groupbox {
+  padding: 10px 20px;
+}
+checkbox {
+  border: 0px;
+  margin: 0px;
+  padding: 0px;
+}
+.indent {
+  margin-left: 25px;
+}
