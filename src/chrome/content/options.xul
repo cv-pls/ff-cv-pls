@@ -5,15 +5,15 @@
 <prefwindow title="[cv-pls] Helper Preferences" xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul">
 
   <prefpane label="[cv-pls] Helper Preferences">
-  
+
     <preferences>
       <preference id="cv-pls-pref-oneBox" name="extensions.cv-pls.oneBox" type="bool" />
       <preference id="cv-pls-pref-oneBoxHeight" name="extensions.cv-pls.oneBoxHeight" type="int"/>
       <preference id="cv-pls-pref-removeCompletedOneboxes" name="extensions.cv-pls.removeCompletedOneboxes" type="bool" />
- 
+
       <preference id="cv-pls-pref-cvPlsButton" name="extensions.cv-pls.cvPlsButton" type="bool" />
       <preference id="cv-pls-pref-delvPlsButton" name="extensions.cv-pls.delvPlsButton" type="bool" />
- 
+
       <preference id="cv-pls-pref-soundNotification" name="extensions.cv-pls.soundNotification" type="bool" />
       <preference id="cv-pls-pref-avatarNotification" name="extensions.cv-pls.avatarNotification" type="bool" />
       <preference id="cv-pls-pref-removeLostNotifications" name="extensions.cv-pls.removeLostNotifications" type="bool" />
@@ -54,7 +54,7 @@
           <label control="cv-pls-pref-control-delvPlsButton" value="Add delv-pls button to chat" />
         </hbox>
       </vbox>
-    </groupbox>  
+    </groupbox>
 
     <groupbox>
       <caption label="Notification" />
@@ -76,7 +76,7 @@
           <label control="cv-pls-pref-control-removeCompletedNotifications" value="Remove notifications for questions that have been closed/deleted" />
         </hbox>
       </vbox>
-    </groupbox>  
+    </groupbox>
 
     <groupbox>
       <caption label="Cv status" />
@@ -98,7 +98,7 @@
           <label control="cv-pls-pref-control-strikethroughCompleted" value="Strike through vote requests for questions that have been closed/deleted" />
         </hbox>
       </vbox>
-    </groupbox>  
+    </groupbox>
 
     <groupbox>
       <caption label="Backlog" />
@@ -120,7 +120,7 @@
           </hbox>
         </hbox>
       </vbox>
-    </groupbox>  
+    </groupbox>
 
   </prefpane>
 
