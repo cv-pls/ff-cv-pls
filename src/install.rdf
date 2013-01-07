@@ -1,25 +1,40 @@
-<?xml version="1.0"?>
+<?xml version="1.0" encoding="utf-8"?>
+<RDF:RDF xmlns:RDF="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:em="http://www.mozilla.org/2004/em-rdf#">
+  <RDF:Description about="urn:mozilla:install-manifest">
 
-<RDF xmlns="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
-  xmlns:em="http://www.mozilla.org/2004/em-rdf#">
-
-  <Description about="urn:mozilla:install-manifest">
+    <!-- GUID and type -->
     <em:id>cv-pls@stackoverflow.com</em:id>
-    <em:name>[cv-pls] Helper</em:name>
-    <em:description>Helps to close questions on StackOverflow.com</em:description>
-    <em:version>0.20.0</em:version>
-    <em:creator>[cv-ring]</em:creator>
-    <em:homepageURL>http://github.com/cv-pls/ff-cv-pls</em:homepageURL>
-    <em:optionsURL>chrome://cv-pls/content/options.xul</em:optionsURL>
     <em:type>2</em:type>
 
-    <!-- Mozilla Firefox -->
+    <!-- Extension details -->
+    <em:name>[cv-pls] Helper</em:name>
+    <em:description>Helps to close questions on StackOverflow.com</em:description>
+    <em:creator>[cv-ring]</em:creator>
+    <em:homepageURL>http://github.com/cv-pls/ff-cv-pls</em:homepageURL>
+
+    <!-- Current version -->
+    <em:version>0.21.0</em:version>
+
+    <!-- Internal path of settings document -->
+    <em:optionsURL>chrome://cv-pls/content/options.xul</em:optionsURL>
+
+    <!-- Auto-update details -->
+    <em:updateURL>http://cv-pls.dev/update.rdf</em:updateURL>
+    <em:updateKey>
+      MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQC2W+2T18rIgrfBi7wN4zacn702
+      1bTIalUvocFQe5/eV16v8nsvLVffwcuaIEaWHDwEFJAUqp2OfNm0F+5YN7qX0WY4
+      d52SI7s0QdXkGAWhxIN2fQVpyURBbSjcmpvFoWf3iawXysVzuZJyFwWY50YEHsQc
+      V2kvuvdfueg23rkYqQIDAQAB
+    </em:updateKey>
+
+    <!-- Firefox meta info -->
     <em:targetApplication>
-      <Description>
+      <RDF:Description>
         <em:id>{ec8030f7-c20a-464f-9b0e-13a3a9e97384}</em:id>
         <em:minVersion>4.0</em:minVersion>
-        <em:maxVersion>10.*</em:maxVersion>
-      </Description>
+        <em:maxVersion>20.*</em:maxVersion>
+      </RDF:Description>
     </em:targetApplication>
-  </Description>
-</RDF>
+
+  </RDF:Description>
+</RDF:RDF>
