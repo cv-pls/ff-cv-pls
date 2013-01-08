@@ -36,22 +36,22 @@
         <hbox>
           <checkbox id="cv-pls-pref-control-oneBox" preference="cv-pls-pref-oneBox" />
           <hbox align="baseline">
-            <label control="cv-pls-pref-control-oneBox" value="OneBox vote requests" />
-            <textbox id="cv-pls-pref-control-oneBoxHeight" preference="cv-pls-pref-oneBoxHeight" size="2" />
-            <label control="cv-pls-pref-control-oneBoxHeight" value="px" />
+            <label class="label-for-oneBox" control="cv-pls-pref-control-oneBox" value="OneBox vote requests" />
+            <textbox class="depends-on-oneBox" id="cv-pls-pref-control-oneBoxHeight" preference="cv-pls-pref-oneBoxHeight" size="2" />
+            <label class="label-for-oneBox" control="cv-pls-pref-control-oneBoxHeight" value="px" />
           </hbox>
         </hbox>
         <hbox class="indent">
-          <checkbox id="cv-pls-pref-control-removeCompletedOneboxes" preference="cv-pls-pref-removeCompletedOneboxes" />
-          <label control="cv-pls-pref-control-removeCompletedOneboxes" value="Remove OneBoxes for questions that have been closed/deleted" />
+          <checkbox class="depends-on-oneBox" id="cv-pls-pref-control-removeCompletedOneboxes" preference="cv-pls-pref-removeCompletedOneboxes" />
+          <label class="label-for-removeCompletedOneboxes" control="cv-pls-pref-control-removeCompletedOneboxes" value="Remove OneBoxes for questions that have been closed/deleted" />
         </hbox>
         <hbox>
           <checkbox id="cv-pls-pref-control-cvPlsButton" preference="cv-pls-pref-cvPlsButton" />
-          <label control="cv-pls-pref-control-cvPlsButton" value="Add cv-pls button to chat" />
+          <label class="label-for-cvPlsButton" control="cv-pls-pref-control-cvPlsButton" value="Add cv-pls button to chat" />
         </hbox>
         <hbox>
           <checkbox id="cv-pls-pref-control-delvPlsButton" preference="cv-pls-pref-delvPlsButton" />
-          <label control="cv-pls-pref-control-delvPlsButton" value="Add delv-pls button to chat" />
+          <label class="label-for-delvPlsButton" control="cv-pls-pref-control-delvPlsButton" value="Add delv-pls button to chat" />
         </hbox>
       </vbox>
     </groupbox>
@@ -61,19 +61,19 @@
       <vbox>
         <hbox>
           <checkbox id="cv-pls-pref-control-soundNotification" preference="cv-pls-pref-soundNotification" />
-          <label control="cv-pls-pref-control-soundNotification" value="Enable sound notification (@mention beep)" />
+          <label class="label-for-soundNotification" control="cv-pls-pref-control-soundNotification" value="Enable sound notification (@mention beep)" />
         </hbox>
         <hbox>
           <checkbox id="cv-pls-pref-control-avatarNotification" preference="cv-pls-pref-avatarNotification" />
-          <label control="cv-pls-pref-control-avatarNotification" value="Enable avatar notifications" />
+          <label class="label-for-avatarNotification" control="cv-pls-pref-control-avatarNotification" value="Enable avatar notifications" />
         </hbox>
         <hbox class="indent">
-          <checkbox id="cv-pls-pref-control-removeLostNotifications" preference="cv-pls-pref-removeLostNotifications" />
-          <label control="cv-pls-pref-control-removeLostNotifications" value="Remove notifications for vote requests that scroll off screen" />
+          <checkbox class="depends-on-avatarNotification" id="cv-pls-pref-control-removeLostNotifications" preference="cv-pls-pref-removeLostNotifications" />
+          <label class="label-for-removeLostNotifications" control="cv-pls-pref-control-removeLostNotifications" value="Remove notifications for vote requests that scroll off screen" />
         </hbox>
         <hbox class="indent">
-          <checkbox id="cv-pls-pref-control-removeCompletedNotifications" preference="cv-pls-pref-removeCompletedNotifications" />
-          <label control="cv-pls-pref-control-removeCompletedNotifications" value="Remove notifications for questions that have been closed/deleted" />
+          <checkbox class="depends-on-avatarNotification" id="cv-pls-pref-control-removeCompletedNotifications" preference="cv-pls-pref-removeCompletedNotifications" />
+          <label class="label-for-removeCompletedNotifications" control="cv-pls-pref-control-removeCompletedNotifications" value="Remove notifications for questions that have been closed/deleted" />
         </hbox>
       </vbox>
     </groupbox>
@@ -83,19 +83,19 @@
       <vbox>
         <hbox>
           <checkbox id="cv-pls-pref-control-showCloseStatus" preference="cv-pls-pref-showCloseStatus" />
-          <label control="cv-pls-pref-control-showCloseStatus" value="Show status in onebox" />
+          <label class="label-for-showCloseStatus" control="cv-pls-pref-control-showCloseStatus" value="Show status in onebox" />
         </hbox>
         <hbox>
-          <checkbox id="cv-pls-pref-control-pollCloseStatus" preference="cv-pls-pref-pollCloseStatus" />
+          <checkbox class="depends-on-showCloseStatus" id="cv-pls-pref-control-pollCloseStatus" preference="cv-pls-pref-pollCloseStatus" />
           <hbox align="baseline">
-            <label control="cv-pls-pref-control-pollCloseStatus" value="Poll server for closed questions every" />
-            <textbox id="cv-pls-pref-control-pollInterval" preference="cv-pls-pref-pollInterval" size="1" />
-            <label control="cv-pls-pref-control-pollInterval" value="minutes" class="spaced" />
+            <label class="label-for-pollCloseStatus" control="cv-pls-pref-control-pollCloseStatus" value="Poll server for closed questions every" />
+            <textbox class="depends-on-pollCloseStatus" id="cv-pls-pref-control-pollInterval" preference="cv-pls-pref-pollInterval" size="1" />
+            <label class="label-for-pollCloseStatus spaced" control="cv-pls-pref-control-pollInterval" value="minutes" />
           </hbox>
         </hbox>
         <hbox>
           <checkbox id="cv-pls-pref-control-strikethroughCompleted" preference="cv-pls-pref-strikethroughCompleted" />
-          <label control="cv-pls-pref-control-strikethroughCompleted" value="Strike through vote requests for questions that have been closed/deleted" />
+          <label class="label-for-strikethroughCompleted" control="cv-pls-pref-control-strikethroughCompleted" value="Strike through vote requests for questions that have been closed/deleted" />
         </hbox>
       </vbox>
     </groupbox>
@@ -105,23 +105,27 @@
       <vbox>
         <hbox>
           <checkbox id="cv-pls-pref-control-backlogEnabled" preference="cv-pls-pref-backlogEnabled" />
-          <label control="cv-pls-pref-control-backlogEnabled" value="Change room description into the backlog" />
+          <label class="label-for-backlogEnabled" control="cv-pls-pref-control-backlogEnabled" value="Change room description into the backlog" />
         </hbox>
         <hbox align="baseline">
-          <label control="cv-pls-pref-control-backlogAmount" value="Number of items in the list" />
-          <textbox id="cv-pls-pref-control-backlogAmount" preference="cv-pls-pref-backlogAmount" size="1" />
+          <label class="label-for-backlogAmount" control="cv-pls-pref-control-backlogAmount" value="Number of items in the list" />
+          <textbox class="depends-on-backlogEnabled" id="cv-pls-pref-control-backlogAmount" preference="cv-pls-pref-backlogAmount" size="1" />
         </hbox>
         <hbox>
-          <checkbox id="cv-pls-pref-control-backlogRefresh" preference="cv-pls-pref-backlogRefresh" />
+          <checkbox class="depends-on-backlogEnabled" id="cv-pls-pref-control-backlogRefresh" preference="cv-pls-pref-backlogRefresh" />
           <hbox align="baseline">
-            <label control="cv-pls-pref-control-backlogRefresh" value="Refresh backlog every" />
-            <textbox id="cv-pls-pref-control-backlogRefreshInterval" preference="cv-pls-pref-backlogRefreshInterval" size="1" />
-            <label control="cv-pls-pref-control-backlogRefreshInterval" value="minutes" class="spaced" />
+            <label class="label-for-backlogRefresh" control="cv-pls-pref-control-backlogRefresh" value="Refresh backlog every" />
+            <textbox class="depends-on-backlogRefresh" id="cv-pls-pref-control-backlogRefreshInterval" preference="cv-pls-pref-backlogRefreshInterval" size="1" />
+            <label class="label-for-backlogRefresh spaced" control="cv-pls-pref-control-backlogRefreshInterval" value="minutes" />
           </hbox>
         </hbox>
       </vbox>
     </groupbox>
 
   </prefpane>
+
+  <script type="text/javascript" src="chrome://cv-pls/content/cv-pls/src/CvPlsHelper.js"></script>
+  <script type="text/javascript" src="chrome://cv-pls/content/SettingsManager.js"></script>
+  <script type="text/javascript" src="chrome://cv-pls/content/options.js"></script>
 
 </prefwindow>
