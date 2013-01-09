@@ -1,29 +1,26 @@
 /*jslint plusplus: true, white: true, browser: true */
 /*global CvPlsHelper */
 
-CvPlsHelper.firefox.SettingsManager = function() {
+(function() {
 
-  "use strict";
+  'use strict';
 
-  var self = this;
-
-  this.getInputByName = function(name) {
-    console.log(name);
+  function getInputByPrefName(name) {
     var input = document.getElementById('cv-pls-pref-control-'+name);
     if (input) {
-      self[name] = input;
+      this[name] = input;
       return true;
     }
     return false;
-  };
+  }
 
-  this.toggleInput = function(input, state, noRecurse) {
+  function toggleInput(input, state, noRecurse) {
     var labels, i;
     noRecurse = noRecurse || false;
 
     input.disabled = !state;
 
-    labels = document.querySelector('.label-for-'+input.id.split('-').pop());
+    labels = document.querySelectorAll('.label-for-'+input.id.split('-').pop());
     if (labels) {
       for (i in labels) {
         if (labels.hasOwnProperty(i)) {
@@ -33,138 +30,129 @@ CvPlsHelper.firefox.SettingsManager = function() {
     }
 
     if (!noRecurse) {
-      self.toggleDependencies(input, state, state);
+      toggleDependencies(input, state, state);
     }
-  };
-  this.toggleDependencies = function(input, state, noRecurse) {
+  }
+  function toggleDependencies(input, state, noRecurse) {
     var dependencies, i;
     noRecurse = noRecurse || false;
 
-    dependencies = document.querySelector('.depends-on-'+input.id.split('-').pop());
+    dependencies = document.querySelectorAll('.depends-on-'+input.id.split('-').pop());
     if (dependencies) {
       for (i in dependencies) {
         if (dependencies.hasOwnProperty(i) && !noRecurse && dependencies[i].tagName !== 'label') {
-          self.toggleInput(dependencies[i], state, state);
+          toggleInput(dependencies[i], state, state);
         }
       }
     }
   }
 
-  this.initOneBox = function() {
-    self.getInputByName('oneBoxHeight');
-    self.getInputByName('removeCompletedOneboxes');
-    if (self.getInputByName('oneBox')) {
-      if (!self.oneBox.checked) {
-        self.oneBoxHeight.disabled = true;
-        self.toggleInput(self.removeCompletedOneboxes, false);
-      }
-      self.oneBox.addEventListener('command', function() {
-        self.oneBoxHeight.disabled = !this.checked;
-        self.toggleInput(self.removeCompletedOneboxes, this.checked);
-      });
-    }
-  };
+  function loadInputs() {
+    getInputByPrefName.call(this, 'oneBoxHeight');
+    getInputByPrefName.call(this, 'removeCompletedOneboxes');
+    getInputByPrefName.call(this, 'oneBox');
 
-  this.initAvatarNotification = function() {
-    self.getInputByName('removeLostNotifications');
-    self.getInputByName('removeCompletedNotifications');
-    if (self.getInputByName('avatarNotification')) {
-      if (!self.avatarNotification.checked) {
-        self.toggleInput(self.removeLostNotifications, false);
-        self.toggleInput(self.removeCompletedNotifications, false);
-      }
-      self.avatarNotification.addEventListener('command', function() {
-        self.toggleInput(self.removeLostNotifications, this.checked);
-        self.toggleInput(self.removeCompletedNotifications, this.checked);
-      });
-    }
-  };
+    getInputByPrefName.call(this, 'removeLostNotifications');
+    getInputByPrefName.call(this, 'removeCompletedNotifications');
+    getInputByPrefName.call(this, 'avatarNotification');
 
-  this.initShowCloseStatus = function() {
-    self.initPollCloseStatus();
-    if (self.getInputByName('showCloseStatus')) {
-      if (!self.showCloseStatus.checked) {
-        self.toggleInput(self.pollCloseStatus, false);
-        self.toggleInput(self.pollInterval, false);
-      }
-      self.showCloseStatus.addEventListener('command', function() {
-        if (this.checked) {
-          self.toggleInput(self.pollCloseStatus, true);
-          if (self.pollCloseStatus.checked) {
-            self.toggleInput(self.pollInterval, true);
-          }
-        } else {
-          self.toggleInput(self.pollCloseStatus, false);
-          self.toggleInput(self.pollInterval, false);
+    getInputByPrefName.call(this, 'pollInterval');
+    getInputByPrefName.call(this, 'showCloseStatus');
+    getInputByPrefName.call(this, 'pollCloseStatus');
+
+    getInputByPrefName.call(this, 'backlogAmount');
+    getInputByPrefName.call(this, 'backlogRefreshInterval');
+    getInputByPrefName.call(this, 'backlogRefresh');
+    getInputByPrefName.call(this, 'backlogEnabled');
+
+    getInputByPrefName.call(this, 'dupesEnabled');
+  }
+
+  function initAppearance() {
+    var self = this;
+    this.oneBox.addEventListener('command', function() {
+      self.oneBoxHeight.disabled = !this.checked;
+      toggleInput(self.removeCompletedOneboxes, this.checked);
+    });
+
+    if (!this.oneBox.checked) {
+      this.oneBoxHeight.disabled = true;
+      toggleInput(this.removeCompletedOneboxes, false);
+    }
+  }
+  function initNotification() {
+    var self = this;
+    this.avatarNotification.addEventListener('command', function() {
+      toggleInput(self.removeLostNotifications, this.checked);
+      toggleInput(self.removeCompletedNotifications, this.checked);
+    });
+
+    if (!this.avatarNotification.checked) {
+      toggleInput(this.removeLostNotifications, false);
+      toggleInput(this.removeCompletedNotifications, false);
+    }
+  }
+  function initVoteStatus() {
+    var self = this;
+    this.pollCloseStatus.addEventListener('command', function() {
+      toggleInput(self.pollInterval, this.checked);
+    });
+    this.showCloseStatus.addEventListener('command', function() {
+      if (this.checked) {
+        toggleInput(self.pollCloseStatus, true);
+        if (self.pollCloseStatus.checked) {
+          toggleInput(self.pollInterval, true);
         }
-      });
-    }
-  };
-  this.initPollCloseStatus = function() {
-    self.getInputByName('pollInterval');
-    if (self.getInputByName('pollCloseStatus')) {
-      if (!self.pollCloseStatus.checked) {
-        self.toggleInput(self.pollInterval, false);
+      } else {
+        toggleInput(self.pollCloseStatus, false);
+        toggleInput(self.pollInterval, false);
       }
-      self.pollCloseStatus.addEventListener('command', function() {
-        self.toggleInput(self.pollInterval, this.checked);
-      });
-    }
-  };
+    });
 
-  this.initBacklogEnabled = function() {
-    self.getInputByName('backlogAmount');
-    self.initBacklogRefresh();
-    if (self.getInputByName('backlogEnabled')) {
-      if (!self.backlogEnabled.checked) {
-        self.toggleInput(self.backlogAmount, false);
-        self.toggleInput(self.backlogRefresh, false);
-        self.toggleInput(self.backlogRefreshInterval, false);
-      }
-      self.backlogEnabled.addEventListener('command', function() {
-        if (this.checked) {
-          self.toggleInput(self.backlogAmount, true);
-          self.toggleInput(self.backlogRefresh, true);
-          if (self.backlogRefresh.checked) {
-            self.toggleInput(self.backlogRefreshInterval, true);
-          }
-        } else {
-          self.toggleInput(self.backlogAmount, false);
-          self.toggleInput(self.backlogRefresh, false);
-          self.toggleInput(self.backlogRefreshInterval, false);
+    if (!this.pollCloseStatus.checked) {
+      toggleInput(this.pollInterval, false);
+    }
+    if (!this.showCloseStatus.checked) {
+      toggleInput(this.pollCloseStatus, false);
+      toggleInput(this.pollInterval, false);
+    }
+  }
+  function initBacklog() {
+    var self = this;
+    this.backlogRefresh.addEventListener('command', function() {
+      self.backlogRefreshInterval.disabled = !this.checked;
+    });
+    this.backlogEnabled.addEventListener('command', function() {
+      if (this.checked) {
+        toggleInput(self.backlogAmount, true);
+        toggleInput(self.backlogRefresh, true);
+        if (self.backlogRefresh.checked) {
+          toggleInput(self.backlogRefreshInterval, true);
         }
-      });
-    }
-  };
-  this.initBacklogRefresh = function() {
-    self.getInputByName('backlogRefreshInterval');
-    if (self.getInputByName('backlogRefresh')) {
-      if (!self.backlogRefresh.checked) {
-        self.toggleInput(self.backlogRefreshInterval, false);
+      } else {
+        toggleInput(self.backlogAmount, false);
+        toggleInput(self.backlogRefresh, false);
+        toggleInput(self.backlogRefreshInterval, false);
       }
-      self.backlogRefresh.addEventListener('command', function() {
-        self.backlogRefreshInterval.disabled = !this.checked;
-      });
+    });
+
+    if (!this.backlogRefresh.checked) {
+      toggleInput(this.backlogRefreshInterval, false);
     }
-  };
-
-  this.initDupesEnabled = function() {
-    if (self.getInputByName('dupesEnabled')) {
-      if (!self.dupesEnabled.checked) {
-        self.toggleInput(self.showDupes, false);
-      }
-      self.dupesEnabled.addEventListener('command', function() {
-        self.toggleInput(self.showDupes, this.checked);
-      });
+    if (!this.backlogEnabled.checked) {
+      toggleInput(this.backlogAmount, false);
+      toggleInput(this.backlogRefresh, false);
+      toggleInput(this.backlogRefreshInterval, false);
     }
+  }
+
+  CvPlsHelper.firefox.SettingsManager = function() {
+    loadInputs.call(this);
+
+    initAppearance.call(this);
+    initNotification.call(this);
+    initVoteStatus.call(this);
+    initBacklog.call(this);
   };
 
-  this.init = function() {
-    self.initOneBox();
-    self.initAvatarNotification();
-    self.initShowCloseStatus();
-    self.initBacklogEnabled();
-    self.initDupesEnabled();
-  };
-
-};
+}());

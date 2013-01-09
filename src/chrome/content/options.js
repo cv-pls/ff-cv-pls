@@ -5,6 +5,6 @@
 
   'use strict';
 
-  (new CvPlsHelper.firefox.SettingsManager()).init();
+  (new CvPlsHelper.firefox.SettingsManager());
 
 }());
