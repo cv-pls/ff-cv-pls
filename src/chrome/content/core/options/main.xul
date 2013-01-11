@@ -125,7 +125,7 @@
   </prefpane>
 
   <script type="text/javascript" src="chrome://cv-pls/content/cv-pls/src/CvPlsHelper.js"></script>
-  <script type="text/javascript" src="chrome://cv-pls/content/SettingsManager.js"></script>
-  <script type="text/javascript" src="chrome://cv-pls/content/options.js"></script>
+  <script type="text/javascript" src="chrome://cv-pls/content/core/options/SettingsManager.js"></script>
+  <script type="text/javascript" src="chrome://cv-pls/content/core/options/main.js"></script>
 
 </prefwindow>

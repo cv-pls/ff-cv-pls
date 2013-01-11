@@ -1,1 +1,0 @@
-CvPlsHelper.firefox.DefaultSettings = {};

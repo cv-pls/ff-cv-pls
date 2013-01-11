@@ -16,7 +16,7 @@
     <em:version>0.20.0</em:version>
 
     <!-- Internal path of settings document -->
-    <em:optionsURL>chrome://cv-pls/content/options.xul</em:optionsURL>
+    <em:optionsURL>chrome://cv-pls/content/core/options/main.xul</em:optionsURL>
 
     <!-- Auto-update details -->
     <em:updateURL>http://cv-pls.dev/update.rdf</em:updateURL>
