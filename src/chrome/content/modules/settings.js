@@ -124,7 +124,7 @@
     SettingsDataStore.prototype.getSetting = function(key) {
       var result;
       try {
-        switch (prefs.getPrefType(key)) {
+        switch (this.prefs.getPrefType(key)) {
           case this.prefs.PREF_INT:
             result = this.prefs.getIntPref(key);
             break;

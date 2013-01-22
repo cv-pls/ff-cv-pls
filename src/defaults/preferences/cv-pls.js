@@ -18,7 +18,7 @@ pref('extensions.cv-pls.desktopNotification', false);
 // Vote request status
 pref('extensions.cv-pls.showCloseStatus', true);
 pref('extensions.cv-pls.pollCloseStatus', true);
-pref('extensions.cv-pls.pollInterval', 5);
+pref('extensions.cv-pls.pollInterval', 1);
 pref('extensions.cv-pls.strikethroughCompleted', true);
 
 // Backlog
