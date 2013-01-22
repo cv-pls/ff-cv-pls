@@ -231,9 +231,9 @@
 
   $extnGUID = 'cv-pls@stackoverflow.com';
 
-  $version = '0.21.0';
+  $version = '0.20.0';
   $localPath = '.';
-  $baseURL = 'http://cv-pls.dev';
+  $baseURL = 'https://cv-pls.pieterhordijk.com';
 
   $privateKey = 'ff-cv-pls.pem';
   $outFile = 'update.rdf';

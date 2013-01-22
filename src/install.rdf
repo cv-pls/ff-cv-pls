@@ -19,7 +19,7 @@
     <em:optionsURL>chrome://cv-pls/content/core/options/main.xul</em:optionsURL>
 
     <!-- Auto-update details -->
-    <em:updateURL>http://cv-pls.dev/update.rdf</em:updateURL>
+    <em:updateURL>https://cv-pls.pieterhordijk.com/update/mozilla</em:updateURL>
     <em:updateKey>
       MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQC2W+2T18rIgrfBi7wN4zacn702
       1bTIalUvocFQe5/eV16v8nsvLVffwcuaIEaWHDwEFJAUqp2OfNm0F+5YN7qX0WY4
@@ -31,8 +31,8 @@
     <em:targetApplication>
       <RDF:Description>
         <em:id>{ec8030f7-c20a-464f-9b0e-13a3a9e97384}</em:id>
-        <em:minVersion>4.0</em:minVersion>
-        <em:maxVersion>20.*</em:maxVersion>
+        <em:minVersion>10.0</em:minVersion>
+        <em:maxVersion>99.*</em:maxVersion>
       </RDF:Description>
     </em:targetApplication>
 
