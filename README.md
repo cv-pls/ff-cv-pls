@@ -3,7 +3,7 @@ Firefox [cv-pls]
 
 Mozilla Firefox extension wrapper for the [[cv-pls] Helper][1].
 
-Current stable version: [0.20.0](https://cv-pls.pieterhordijk.com/cv-pls_0.20.0.xpi)  
+Current stable version: [0.20.0](https://cv-pls.pieterhordijk.com/mozilla/cv-pls_0.20.0.xpi)  
 Current development version: *None*
 
 Installation
