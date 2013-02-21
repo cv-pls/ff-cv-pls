@@ -231,7 +231,7 @@
 
   $extnGUID = 'cv-pls@stackoverflow.com';
 
-  $version = '0.20.1';
+  $version = '0.20.0.1';
   $localPath = '.';
   $baseURL = 'https://cv-pls.pieterhordijk.com';
 

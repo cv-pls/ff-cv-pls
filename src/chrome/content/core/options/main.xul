@@ -10,6 +10,8 @@
       <preference id="cv-pls-pref-oneBox" name="extensions.cv-pls.oneBox" type="bool" />
       <preference id="cv-pls-pref-oneBoxHeight" name="extensions.cv-pls.oneBoxHeight" type="int"/>
       <preference id="cv-pls-pref-removeCompletedOneboxes" name="extensions.cv-pls.removeCompletedOneboxes" type="bool" />
+      <preference id="cv-pls-pref-removeClickedOneboxes" name="extensions.cv-pls.removeClickedOneboxes" type="bool" />
+      <preference id="cv-pls-pref-addVisitedLabelToClickedPosts" name="extensions.cv-pls.addVisitedLabelToClickedPosts" type="bool" />
 
       <preference id="cv-pls-pref-cvPlsButton" name="extensions.cv-pls.cvPlsButton" type="bool" />
       <preference id="cv-pls-pref-delvPlsButton" name="extensions.cv-pls.delvPlsButton" type="bool" />
@@ -18,6 +20,12 @@
       <preference id="cv-pls-pref-avatarNotification" name="extensions.cv-pls.avatarNotification" type="bool" />
       <preference id="cv-pls-pref-removeLostNotifications" name="extensions.cv-pls.removeLostNotifications" type="bool" />
       <preference id="cv-pls-pref-removeCompletedNotifications" name="extensions.cv-pls.removeCompletedNotifications" type="bool" />
+
+      <preference id="cv-pls-pref-trackHistory" name="extensions.cv-pls.trackHistory" type="bool" />
+      <preference id="cv-pls-pref-ignoreOneboxClickedPosts" name="extensions.cv-pls.ignoreOneboxClickedPosts" type="bool" />
+      <preference id="cv-pls-pref-ignoreNotifyClickedPosts" name="extensions.cv-pls.ignoreNotifyClickedPosts" type="bool" />
+      <preference id="cv-pls-pref-addVisitedLabelToPreviouslyClickedPosts" name="extensions.cv-pls.addVisitedLabelToPreviouslyClickedPosts" type="bool" />
+      <preference id="cv-pls-pref-clickedListLength" name="extensions.cv-pls.clickedListLength" type="int" />
 
       <preference id="cv-pls-pref-showCloseStatus" name="extensions.cv-pls.showCloseStatus" type="bool" />
       <preference id="cv-pls-pref-pollCloseStatus" name="extensions.cv-pls.pollCloseStatus" type="bool" />
@@ -45,6 +53,10 @@
           <checkbox class="depends-on-oneBox" id="cv-pls-pref-control-removeCompletedOneboxes" preference="cv-pls-pref-removeCompletedOneboxes" />
           <label class="label-for-removeCompletedOneboxes" control="cv-pls-pref-control-removeCompletedOneboxes">Remove OneBoxes for questions that have been closed/deleted</label>
         </hbox>
+        <hbox class="indent">
+          <checkbox class="depends-on-oneBox" id="cv-pls-pref-control-removeClickedOneboxes" preference="cv-pls-pref-removeClickedOneboxes" />
+          <label class="label-for-removeClickedOneboxes" control="cv-pls-pref-control-removeClickedOneboxes">Remove OneBoxes for questions that I have visited</label>
+        </hbox>
         <hbox>
           <checkbox id="cv-pls-pref-control-cvPlsButton" preference="cv-pls-pref-cvPlsButton" />
           <label class="label-for-cvPlsButton" control="cv-pls-pref-control-cvPlsButton">Add cv-pls button to chat</label>
@@ -52,6 +64,10 @@
         <hbox>
           <checkbox id="cv-pls-pref-control-delvPlsButton" preference="cv-pls-pref-delvPlsButton" />
           <label class="label-for-delvPlsButton" control="cv-pls-pref-control-delvPlsButton">Add delv-pls button to chat</label>
+        </hbox>
+        <hbox>
+          <checkbox id="cv-pls-pref-control-addVisitedLabelToClickedPosts" preference="cv-pls-pref-addVisitedLabelToClickedPosts" />
+          <label class="label-for-addVisitedLabelToClickedPosts" control="cv-pls-pref-control-addVisitedLabelToClickedPosts">Add a "visited" label to questions that I have visited</label>
         </hbox>
       </vbox>
     </groupbox>
@@ -74,6 +90,32 @@
         <hbox class="indent">
           <checkbox class="depends-on-avatarNotification" id="cv-pls-pref-control-removeCompletedNotifications" preference="cv-pls-pref-removeCompletedNotifications" />
           <label class="label-for-removeCompletedNotifications" control="cv-pls-pref-control-removeCompletedNotifications">Remove notifications for questions that have been closed/deleted</label>
+        </hbox>
+      </vbox>
+    </groupbox>
+
+    <groupbox>
+      <caption label="History" />
+      <vbox>
+        <hbox>
+          <checkbox id="cv-pls-pref-control-trackHistory" preference="cv-pls-pref-trackHistory" />
+          <hbox align="baseline">
+            <label class="label-for-trackHistory" control="cv-pls-pref-control-trackHistory">Track the last</label>
+            <textbox class="depends-on-trackHistory" id="cv-pls-pref-control-clickedListLength" preference="cv-pls-pref-clickedListLength" size="3" />
+            <label class="label-for-trackHistory spaced" control="cv-pls-pref-control-trackHistory">visited vote requests</label>
+          </hbox>
+        </hbox>
+        <hbox class="indent">
+          <checkbox class="depends-on-trackHistory" id="cv-pls-pref-control-ignoreOneboxClickedPosts" preference="cv-pls-pref-ignoreOneboxClickedPosts" />
+          <label class="label-for-ignoreOneboxClickedPosts" control="cv-pls-pref-control-ignoreOneboxClickedPosts">Don't OneBox previously visited vote requests on page load</label>
+        </hbox>
+        <hbox class="indent">
+          <checkbox class="depends-on-trackHistory" id="cv-pls-pref-control-ignoreNotifyClickedPosts" preference="cv-pls-pref-ignoreNotifyClickedPosts" />
+          <label class="label-for-ignoreNotifyClickedPosts" control="cv-pls-pref-control-ignoreNotifyClickedPosts">Don't notify me of previously visited vote requests on page load</label>
+        </hbox>
+        <hbox class="indent">
+          <checkbox class="depends-on-trackHistory" id="cv-pls-pref-control-addVisitedLabelToPreviouslyClickedPosts" preference="cv-pls-pref-addVisitedLabelToPreviouslyClickedPosts" />
+          <label class="label-for-addVisitedLabelToPreviouslyClickedPosts" control="cv-pls-pref-control-addVisitedLabelToPreviouslyClickedPosts">Add a "visited" tag to previously visited vote requests on page load</label>
         </hbox>
       </vbox>
     </groupbox>

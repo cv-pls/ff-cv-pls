@@ -13,7 +13,7 @@
     <em:homepageURL>http://github.com/cv-pls/ff-cv-pls</em:homepageURL>
 
     <!-- Current version -->
-    <em:version>0.20.0</em:version>
+    <em:version>0.20.1</em:version>
 
     <!-- Internal path of settings document -->
     <em:optionsURL>chrome://cv-pls/content/core/options/main.xul</em:optionsURL>
