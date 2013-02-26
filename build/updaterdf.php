@@ -231,14 +231,14 @@
 
   $extnGUID = 'cv-pls@stackoverflow.com';
 
-  $version = '0.20.0.1';
+  $version = '0.20.1';
   $localPath = '.';
   $baseURL = 'https://cv-pls.pieterhordijk.com';
 
   $privateKey = 'mozilla.pem';
   $outFile = 'update.rdf';
 
-  $fileNameFormat = '%s/mozilla/cv-pls_%s.xpi';
+  $fileNameFormat = '%s/cv-pls_%s.xpi';
   $infoURLFormat = '%s/updateinfo.php?version=%s';
 
   $rdf = new FirefoxUpdateRDF;
