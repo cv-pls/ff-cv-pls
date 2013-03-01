@@ -28,6 +28,7 @@
   <script type="text/javascript" src="chrome://cv-pls/content/cv-pls/src/Collection.js" />
   <script type="text/javascript" src="chrome://cv-pls/content/cv-pls/src/CollectionFactory.js" />
   <script type="text/javascript" src="chrome://cv-pls/content/cv-pls/src/CvBacklog.js" />
+  <script type="text/javascript" src="chrome://cv-pls/content/cv-pls/src/CvBacklogUrlManager.js" />
   <script type="text/javascript" src="chrome://cv-pls/content/cv-pls/src/DefaultSettings.js" />
   <script type="text/javascript" src="chrome://cv-pls/content/cv-pls/src/DesktopNotification.js" />
   <script type="text/javascript" src="chrome://cv-pls/content/cv-pls/src/GrippieFactory.js" />

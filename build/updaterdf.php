@@ -1,10 +1,23 @@
 <?php
 
-  class FirefoxUpdateRDF {
+namespace CvPls\Mozilla;
 
-    // Namespace URIs. These will most likely never change.
+use CvPls\Build\DataSigner;
+
+class FirefoxUpdateRDF {
+    /**
+     * @var string The W3 XML namespace URI
+     */
     protected $w3nsUrl = 'http://www.w3.org/2000/xmlns/';
+
+    /**
+     * @var string The W3 RDF namespace URI
+     */
     protected $rdfUrl = 'http://www.w3.org/1999/02/22-rdf-syntax-ns#';
+
+    /**
+     * @var string The Mozilla RDF namespace URI
+     */
     protected $emUrl = 'http://www.mozilla.org/2004/em-rdf#';
 
     // GUID of the Firefox application
@@ -37,30 +50,19 @@
     protected $extnGUID;
     protected $versions = array();
 
-    public function setHashAlgo($algo) {
-      $this->hashAlgo = $algo;
-    }
-    public function getHashAlgo($algo) {
-      return $this->hashAlgo;
-    }
-
-    public function setExtnGUID($guid) {
-      $this->extnGUID = $guid;
-    }
-    public function getExtnGUID($guid) {
-      return $this->extnGUID;
+    public function loadPrivateKey($key, $passphrase = '')
+    {
+        if (!$this->privateKey = openssl_pkey_get_private($key, $passphrase)) {
+            throw new \InvalidArgumentException('Unable to load the specified private key');
+        }
     }
 
-    public function loadPrivateKey($key, $passphrase = '') {
-      if (!$this->privateKey = openssl_pkey_get_private($key, $passphrase)) {
-        throw new \InvalidArgumentException('Unable to load the specified private key');
-      }
-    }
-    public function freePrivateKey() {
-      if ($this->privateKey) {
-        openssl_free_key($this->privateKey);
-        $this->privateKey = NULL;
-      }
+    public function freePrivateKey()
+    {
+        if ($this->privateKey) {
+            openssl_free_key($this->privateKey);
+            $this->privateKey = NULL;
+        }
     }
 
     public function addVersion(array $info) {
@@ -88,36 +90,35 @@
       return $this->versions;
     }
 
-    public function generateRDF($outfile = NULL) {
-      if (!isset($this->extnGUID)) {
-        throw new \RuntimeException('Cannot generate RDF without an extension GUID');
-      } else if (!$this->versions) {
-        throw new \RuntimeException('Cannot generate RDF without at least one update version');
-      } else if (!$this->privateKey) {
-        throw new \RuntimeException('Cannot generate RDF without private key for signature');
-      }
-
-      if ($outfile !== NULL) {
-        if (!$fp = @fopen($outfile, 'a')) {
-          throw new \InvalidArgumentException('The supplied file path is not writable');
+    public function generate($outfile = null)
+    {
+        if (!isset($this->extnGUID)) {
+            throw new \RuntimeException('Cannot generate RDF without an extension GUID');
+        } else if (!$this->versions) {
+            throw new \RuntimeException('Cannot generate RDF without at least one update version');
+        } else if (!$this->privateKey) {
+            throw new \RuntimeException('Cannot generate RDF without private key for signature');
         }
-        fclose($fp);
-      }
 
-      $this->initialiseDocument();
-      $this->createRDFContainer();
-      $this->createRDFVersions();
-      $this->signManifest();
+        if ($outfile !== NULL) {
+            if (!$fp = @fopen($outfile, 'a')) {
+                throw new \InvalidArgumentException('The supplied file path is not writable');
+            }
+            fclose($fp);
+        }
 
-      $result = $this->document->saveXML();
+        $this->initialiseDocument();
+        $this->createRDFContainer();
+        $this->createRDFVersions();
+        $this->signManifest();
 
-      $this->resetObjectProperties();
+        $result = $this->document->saveXML();
 
-      if ($outfile !== NULL) {
-        return file_put_contents($outfile, $result);
-      } else {
-        return $result;
-      }
+        if ($outfile !== NULL) {
+            return file_put_contents($outfile, $result);
+        } else {
+            return $result;
+        }
     }
 
     protected function initialiseDocument() {
@@ -202,32 +203,31 @@
       return base64_encode($derData);
     }
 
-    final protected function getDERLength($data) {
-      $length = strlen($data);
-      if ($length < 128) {
-        return chr($length);
-      } else {
-        // Lazy option that limits the data size to 4.3GB - OK for the purposes of this class
-        // Theoretically the DER standard allows for a length up to 2^1008
-        // TODO: fix this
-        $length = ltrim(pack('N', $length), "\x00");
-        return chr(strlen($length) | 0x80).$length;
-      }
+    private function getDERLength($data)
+    {
+        $length = strlen($data);
+        if ($length < 128) {
+            return chr($length);
+        } else {
+            // Lazy option that limits the data size to 4.3GB - OK for the purposes of this class
+            // Theoretically the DER standard allows for a length up to 2^1008
+            // TODO: fix this
+            $length = ltrim(pack('N', $length), "\x00");
+            return chr(strlen($length) | 0x80).$length;
+        }
     }
 
-    protected function getFileHash($file) {
-      if (!isset($this->hashCache[$file])) {
-        $this->hashCache[$file] = $this->hashAlgo.':'.hash_file($this->hashAlgo, $file);
-      }
-      return $this->hashCache[$file];
+    private function getFileHash($file, $algo = 'sha512')
+    {
+        return $algo . ':' . hash_file($algo, $file);
     }
 
-    protected function resetObjectProperties() {
-      $this->hashCache = array();
-      $this->document = $this->rootEl = $this->containerEl = $this->seqEl = NULL;
+    protected function resetObjectProperties()
+    {
+        $this->document = $this->rootEl = $this->containerEl = $this->seqEl = NULL;
     }
 
-  }
+}
 
   $extnGUID = 'cv-pls@stackoverflow.com';
 
