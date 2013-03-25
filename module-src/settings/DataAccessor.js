@@ -1,5 +1,5 @@
-/*jslint plusplus: true, white: true, browser: true */
-/*global DataAccessor */
+/*jslint plusplus: true, white: true, browser: true, sloppy: true */
+/*global DataAccessor:true, normalizeSetting:false */
 
 /**
  * Allows access to settings
@@ -20,12 +20,12 @@
     /**
      * @param {DataStore} Object which stores the settings
      */
-    ContentSettingsDataAccessor.prototype.dataStore = null;
+    DataAccessor.prototype.dataStore = null;
 
     /**
      * @param {DefaultSettings} Map of the default settings
      */
-    ContentSettingsDataAccessor.prototype.defaultSettings = null;
+    DataAccessor.prototype.defaultSettings = null;
 
     /**
      * Save a setting in the data store
@@ -65,7 +65,7 @@
 
         for (key in this.defaultSettings) {
             if (typeof this.defaultSettings[key] !== 'function') {
-                result[key] = self.getSetting(key);
+                result[key] = this.getSetting(key);
             }
         }
 

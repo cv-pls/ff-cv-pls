@@ -1,6 +1,6 @@
 /*jslint plusplus: true, white: true, browser: true */
 /*global CvPlsHelper */
-/* Built with build-module.php at 2013-03-16 03:11:46 GMT */
+/* Built with build-module.php at Mon, 25 Mar 2013 18:47:40 +0000 */
 
 (function() {
 
@@ -20,14 +20,14 @@
         /**
          * Dispatch a notification to the background page
          */
-        DesktopNotificationDispatcher.prototype.dispatch = function(title, message) {};
+        DesktopNotificationDispatcher.prototype.dispatch = function(/* title, message */) {};
     }());
 
     /**
      * Module definition
      */
     CvPlsHelper.modules.notifications = {
-        load: function(args) {
+        load: function( /* args */ ) {
             return new DesktopNotificationDispatcher();
         }
     };

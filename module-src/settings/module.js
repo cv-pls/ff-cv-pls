@@ -1,5 +1,5 @@
-/*jslint plusplus: true, white: true, browser: true */
-/*global CvPlsHelper, DataAccessor, DataStore, DefaultSettings */
+/*jslint plusplus: true, white: true, browser: true, sloppy: true */
+/*global CvPlsHelper, DataAccessor, DataStore, DefaultSettings, makeDefaultSettingsObject:false */
 
 /**
  * Module definition

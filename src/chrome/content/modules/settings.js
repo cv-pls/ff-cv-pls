@@ -1,12 +1,12 @@
 /*jslint plusplus: true, white: true, browser: true */
 /*global Components, CvPlsHelper */
-/* Built with build-module.php at 2013-03-16 03:08:46 GMT */
+/* Built with build-module.php at Mon, 25 Mar 2013 18:44:54 +0000 */
 
 (function() {
 
     'use strict';
 
-    var DataAccessor, DataStore, DefaultSettings;
+    var DataAccessor, DataStore, DefaultSettings, makeDefaultSettingsObject, normalizeSetting;
 
     /**
      * Normalize a setting to the correct type and value
@@ -16,7 +16,7 @@
      *
      * @return {mixed} The normalized setting
      */
-    function normalizeSetting(value, defaultValue)
+    normalizeSetting = function(value, defaultValue)
     {
         var result;
 
@@ -57,7 +57,7 @@
         }
 
         return result;
-    }
+    };
 
     /**
      * Create a default settings object based on the default values and configured overrides
@@ -67,7 +67,7 @@
      *
      * @return {object} The created object
      */
-    function makeDefaultSettingsObject(defaults, overrides)
+    makeDefaultSettingsObject = function(defaults, overrides)
     {
         var key, result = {};
         overrides = overrides || {};
@@ -88,90 +88,14 @@
         result.currentSavedVersion = '0.0.0.0';
 
         return result;
-    }
+    };
 
     /**
-     * Allows access to settings
+     * The default settings for the plugin
      */
+    DefaultSettings = {};
+
     (function() {
-        /**
-         * Constructor
-         *
-         * @param {DataStore}       dataStore       Object which stores the settings
-         * @param {DefaultSettings} defaultSettings Map of the default settings
-         */
-        DataAccessor = function(dataStore, defaultSettings)
-        {
-            this.dataStore       = dataStore;
-            this.defaultSettings = defaultSettings;
-        };
-
-        /**
-         * @param {DataStore} Object which stores the settings
-         */
-        ContentSettingsDataAccessor.prototype.dataStore = null;
-
-        /**
-         * @param {DefaultSettings} Map of the default settings
-         */
-        ContentSettingsDataAccessor.prototype.defaultSettings = null;
-
-        /**
-         * Save a setting in the data store
-         *
-         * @param {string} key   The setting name
-         * @param {mixed}  value The setting value
-         */
-        DataAccessor.prototype.saveSetting = function(key, value)
-        {
-            this.dataStore.saveSetting(key, value);
-        };
-
-        /**
-         * Retrieve a setting from the data store
-         *
-         * @param {string} key   The setting name
-         *
-         * @return {mixed} The setting value
-         */
-        DataAccessor.prototype.getSetting = function(key)
-        {
-            if (this.defaultSettings[key] !== undefined) {
-                return normalizeSetting(this.dataStore.getSetting(key), this.defaultSettings[key]);
-            }
-
-            return null;
-        };
-
-        /**
-         * Retrieve all settings from the data store
-         *
-         * @return {object} The settings as a map
-         */
-        DataAccessor.prototype.getAllSettings = function()
-        {
-            var key, result = {};
-
-            for (key in this.defaultSettings) {
-                if (typeof this.defaultSettings[key] !== 'function') {
-                    result[key] = self.getSetting(key);
-                }
-            }
-
-            return result;
-        };
-
-        /**
-         * Initialize the settings values
-         *
-         * @param {function} callBack Callback function to execute when the settings are initialized
-         */
-        DataAccessor.prototype.init = function(callBack)
-        {
-            callBack.call();
-        };
-    }());
-
         /**
          * Constructor
          */
@@ -224,28 +148,104 @@
         DataStore.prototype.saveSetting = function(key, value)
         {
             try {
-                switch (prefs.getPrefType(key)) {
+                switch (this.prefs.getPrefType(key)) {
                     case this.prefs.PREF_INT:
-                        result = this.prefs.setIntPref(key, value);
+                        this.prefs.setIntPref(key, value);
                         break;
                     case this.prefs.PREF_BOOL:
-                        result = this.prefs.setBoolPref(key, value);
+                        this.prefs.setBoolPref(key, value);
                         break;
                     case this.prefs.PREF_STRING:
-                        result = this.prefs.setCharPref(key, value);
+                        this.prefs.setCharPref(key, value);
                         break;
                     case this.prefs.PREF_INVALID:
-                        result = null;
-                        break;
+                        throw new Error('Invalid preference type');
                 }
             } catch (e) {}
         };
     }());
 
     /**
-     * The default settings for the plugin
+     * Allows access to settings
      */
-    DefaultSettings = {};
+    (function() {
+        /**
+         * Constructor
+         *
+         * @param {DataStore}       dataStore       Object which stores the settings
+         * @param {DefaultSettings} defaultSettings Map of the default settings
+         */
+        DataAccessor = function(dataStore, defaultSettings)
+        {
+            this.dataStore       = dataStore;
+            this.defaultSettings = defaultSettings;
+        };
+
+        /**
+         * @param {DataStore} Object which stores the settings
+         */
+        DataAccessor.prototype.dataStore = null;
+
+        /**
+         * @param {DefaultSettings} Map of the default settings
+         */
+        DataAccessor.prototype.defaultSettings = null;
+
+        /**
+         * Save a setting in the data store
+         *
+         * @param {string} key   The setting name
+         * @param {mixed}  value The setting value
+         */
+        DataAccessor.prototype.saveSetting = function(key, value)
+        {
+            this.dataStore.saveSetting(key, value);
+        };
+
+        /**
+         * Retrieve a setting from the data store
+         *
+         * @param {string} key   The setting name
+         *
+         * @return {mixed} The setting value
+         */
+        DataAccessor.prototype.getSetting = function(key)
+        {
+            if (this.defaultSettings[key] !== undefined) {
+                return normalizeSetting(this.dataStore.getSetting(key), this.defaultSettings[key]);
+            }
+
+            return null;
+        };
+
+        /**
+         * Retrieve all settings from the data store
+         *
+         * @return {object} The settings as a map
+         */
+        DataAccessor.prototype.getAllSettings = function()
+        {
+            var key, result = {};
+
+            for (key in this.defaultSettings) {
+                if (typeof this.defaultSettings[key] !== 'function') {
+                    result[key] = this.getSetting(key);
+                }
+            }
+
+            return result;
+        };
+
+        /**
+         * Initialize the settings values
+         *
+         * @param {function} callBack Callback function to execute when the settings are initialized
+         */
+        DataAccessor.prototype.init = function(callBack)
+        {
+            callBack.call();
+        };
+    }());
 
     /**
      * Module definition

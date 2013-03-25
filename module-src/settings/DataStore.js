@@ -1,5 +1,5 @@
-/*jslint plusplus: true, white: true, browser: true */
-/*global DataStore, Components */
+/*jslint plusplus: true, white: true, browser: true, sloppy: true */
+/*global DataStore:true, Components */
 
 (function() {
     /**
@@ -54,19 +54,18 @@
     DataStore.prototype.saveSetting = function(key, value)
     {
         try {
-            switch (prefs.getPrefType(key)) {
+            switch (this.prefs.getPrefType(key)) {
                 case this.prefs.PREF_INT:
-                    result = this.prefs.setIntPref(key, value);
+                    this.prefs.setIntPref(key, value);
                     break;
                 case this.prefs.PREF_BOOL:
-                    result = this.prefs.setBoolPref(key, value);
+                    this.prefs.setBoolPref(key, value);
                     break;
                 case this.prefs.PREF_STRING:
-                    result = this.prefs.setCharPref(key, value);
+                    this.prefs.setCharPref(key, value);
                     break;
                 case this.prefs.PREF_INVALID:
-                    result = null;
-                    break;
+                    throw new Error('Invalid preference type');
             }
         } catch (e) {}
     };

@@ -8,8 +8,6 @@
 
   <!-- libraries -->
   <script type="text/javascript" src="chrome://cv-pls/content/cv-pls/lib/grippie.js" />
-  <script type="text/javascript" src="chrome://cv-pls/content/cv-pls/lib/shims.js" />
-  <script type="text/javascript" src="chrome://cv-pls/content/cv-pls/lib/mutations.js" />
   <script type="text/javascript" src="chrome://cv-pls/content/cv-pls/lib/animator.js" />
 
   <!-- namespace container -->
@@ -51,6 +49,7 @@
   <!-- modules -->
   <script type="text/javascript" src="chrome://cv-pls/content/modules/settings.js" />
   <script type="text/javascript" src="chrome://cv-pls/content/modules/notifications.js" />
+  <script type="text/javascript" src="chrome://cv-pls/content/modules/mutations.js" />
 
   <!-- bootstrap -->
   <script type="text/javascript" src="chrome://cv-pls/content/core/ModuleLoader.js" />

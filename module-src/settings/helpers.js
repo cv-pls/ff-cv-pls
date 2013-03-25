@@ -1,4 +1,6 @@
-/*jslint plusplus: true, white: true, browser: true */
+/*jslint plusplus: true, white: true, browser: true, sloppy: true */
+
+var normalizeSetting, makeDefaultSettingsObject;
 
 /**
  * Normalize a setting to the correct type and value
@@ -8,7 +10,7 @@
  *
  * @return {mixed} The normalized setting
  */
-function normalizeSetting(value, defaultValue)
+normalizeSetting = function(value, defaultValue)
 {
     var result;
 
@@ -49,7 +51,7 @@ function normalizeSetting(value, defaultValue)
     }
 
     return result;
-}
+};
 
 /**
  * Create a default settings object based on the default values and configured overrides
@@ -59,7 +61,7 @@ function normalizeSetting(value, defaultValue)
  *
  * @return {object} The created object
  */
-function makeDefaultSettingsObject(defaults, overrides)
+makeDefaultSettingsObject = function(defaults, overrides)
 {
     var key, result = {};
     overrides = overrides || {};
@@ -80,4 +82,4 @@ function makeDefaultSettingsObject(defaults, overrides)
     result.currentSavedVersion = '0.0.0.0';
 
     return result;
-}
+};

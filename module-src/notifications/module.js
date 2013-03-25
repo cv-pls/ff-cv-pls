@@ -1,11 +1,11 @@
-/*jslint plusplus: true, white: true, browser: true */
+/*jslint plusplus: true, white: true, browser: true, sloppy: true */
 /*global CvPlsHelper, DesktopNotificationDispatcher */
 
 /**
  * Module definition
  */
 CvPlsHelper.modules.notifications = {
-    load: function(args) {
+    load: function( /* args */ ) {
         return new DesktopNotificationDispatcher();
     }
 };

@@ -1,5 +1,5 @@
-/*jslint plusplus: true, white: true, browser: true */
-/*global DesktopNotificationDispatcher */
+/*jslint plusplus: true, white: true, browser: true, sloppy: true */
+/*global DesktopNotificationDispatcher: true */
 
 /**
  * Relays desktop notifications to the background page
@@ -13,5 +13,5 @@
     /**
      * Dispatch a notification to the background page
      */
-    DesktopNotificationDispatcher.prototype.dispatch = function(title, message) {};
+    DesktopNotificationDispatcher.prototype.dispatch = function(/* title, message */) {};
 }());
